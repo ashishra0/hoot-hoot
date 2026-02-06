@@ -1,0 +1,77 @@
+<%# Owl SVG character with mood-based expressions %>
+<%# mood: :sleepy, :waiting, :happy, :excited, :celebrating %>
+
+<div class="owl-character owl-<%= mood %>" data-controller="owl" data-owl-mood-value="<%= mood %>">
+  <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg" class="w-48 h-52 sm:w-56 sm:h-60 drop-shadow-2xl select-none">
+    <%# Ear tufts %>
+    <g class="owl-ears">
+      <path d="M60 75 L75 30 L90 70" fill="#8eb5ff" class="owl-ear-left" />
+      <path d="M110 70 L125 30 L140 75" fill="#8eb5ff" class="owl-ear-right" />
+    </g>
+
+    <%# Body %>
+    <ellipse cx="100" cy="135" rx="70" ry="80" fill="#d9e6ff" class="owl-body" />
+
+    <%# Belly %>
+    <ellipse cx="100" cy="155" rx="40" ry="45" fill="#eef4ff" opacity="0.8" />
+
+    <%# Feet %>
+    <ellipse cx="78" cy="210" rx="16" ry="8" fill="#f59e0b" />
+    <ellipse cx="122" cy="210" rx="16" ry="8" fill="#f59e0b" />
+
+    <%# Eye whites %>
+    <g class="owl-eyes">
+      <circle cx="72" cy="115" r="28" fill="white" class="owl-eye-white-left" />
+      <circle cx="128" cy="115" r="28" fill="white" class="owl-eye-white-right" />
+    </g>
+
+    <%# Pupils - position changes based on mood via CSS %>
+    <g class="owl-pupils">
+      <circle cx="72" cy="115" r="14" fill="#121b57" class="owl-pupil-left" />
+      <circle cx="128" cy="115" r="14" fill="#121b57" class="owl-pupil-right" />
+      <%# Eye shine %>
+      <circle cx="78" cy="109" r="5" fill="white" class="owl-shine-left" />
+      <circle cx="134" cy="109" r="5" fill="white" class="owl-shine-right" />
+    </g>
+
+    <%# Eyelids - for sleepy/blinking, controlled via CSS %>
+    <g class="owl-eyelids">
+      <ellipse cx="72" cy="115" rx="29" ry="0" fill="#bcd2ff" class="owl-eyelid-left" />
+      <ellipse cx="128" cy="115" rx="29" ry="0" fill="#bcd2ff" class="owl-eyelid-right" />
+    </g>
+
+    <%# Beak %>
+    <polygon points="100,128 92,142 108,142" fill="#f59e0b" class="owl-beak" />
+
+    <%# Blush marks (visible when happy/celebrating) %>
+    <g class="owl-blush" opacity="0">
+      <ellipse cx="55" cy="132" rx="10" ry="6" fill="#ff8fab" opacity="0.5" />
+      <ellipse cx="145" cy="132" rx="10" ry="6" fill="#ff8fab" opacity="0.5" />
+    </g>
+
+    <%# Wings (for celebrating flap) %>
+    <g class="owl-wings">
+      <ellipse cx="35" cy="140" rx="18" ry="35" fill="#bcd2ff" class="owl-wing-left" />
+      <ellipse cx="165" cy="140" rx="18" ry="35" fill="#bcd2ff" class="owl-wing-right" />
+    </g>
+
+    <% if mood == :celebrating %>
+      <%# Party hat %>
+      <polygon points="100,25 85,65 115,65" fill="#f59e0b" />
+      <circle cx="100" cy="25" r="5" fill="#ff6b6b" />
+      <line x1="90" y1="40" x2="110" y2="40" stroke="#3366ff" stroke-width="3" />
+      <line x1="87" y1="50" x2="113" y2="50" stroke="#ff6b6b" stroke-width="3" />
+    <% end %>
+  </svg>
+
+  <% if mood == :celebrating %>
+    <div class="owl-confetti">
+      <div class="confetti-piece confetti-1"></div>
+      <div class="confetti-piece confetti-2"></div>
+      <div class="confetti-piece confetti-3"></div>
+      <div class="confetti-piece confetti-4"></div>
+      <div class="confetti-piece confetti-5"></div>
+      <div class="confetti-piece confetti-6"></div>
+    </div>
+  <% end %>
+</div>

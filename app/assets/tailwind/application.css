@@ -68,3 +68,200 @@
   0% { opacity: 0; transform: translateY(20px); }
   100% { opacity: 1; transform: translateY(0); }
 }
+
+/* ============================================
+   Owl Character Moods & Animations
+   ============================================ */
+
+.owl-character {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.owl-character:active {
+  transform: scale(0.95);
+}
+
+/* Idle bobbing animation */
+.owl-character svg {
+  animation: owl-idle-bob 3s ease-in-out infinite;
+}
+
+@keyframes owl-idle-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* Blink animation on eyes */
+.owl-eyelids ellipse {
+  transition: ry 0.15s ease;
+}
+
+.owl-character svg:hover .owl-eyelids .owl-eyelid-left,
+.owl-character svg:hover .owl-eyelids .owl-eyelid-right {
+  ry: 28px;
+  transition: ry 0.15s ease;
+}
+
+/* Pupil transitions */
+.owl-pupils circle {
+  transition: cx 0.4s ease, cy 0.4s ease, r 0.3s ease;
+}
+
+.owl-blush {
+  transition: opacity 0.4s ease;
+}
+
+/* --- SLEEPY MOOD --- */
+.owl-sleepy .owl-eyelids .owl-eyelid-left,
+.owl-sleepy .owl-eyelids .owl-eyelid-right {
+  ry: 16px;
+}
+
+.owl-sleepy .owl-pupil-left { cy: 120; }
+.owl-sleepy .owl-pupil-right { cy: 120; }
+.owl-sleepy .owl-shine-left { cy: 114; }
+.owl-sleepy .owl-shine-right { cy: 114; }
+
+.owl-sleepy svg {
+  animation: owl-sleepy-bob 4s ease-in-out infinite;
+}
+
+@keyframes owl-sleepy-bob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-3px) rotate(-2deg); }
+  75% { transform: translateY(-3px) rotate(2deg); }
+}
+
+/* --- WAITING MOOD --- */
+.owl-waiting .owl-pupil-left { cx: 80; }
+.owl-waiting .owl-pupil-right { cx: 136; }
+.owl-waiting .owl-shine-left { cx: 86; }
+.owl-waiting .owl-shine-right { cx: 142; }
+
+.owl-waiting svg {
+  animation: owl-waiting-look 3s ease-in-out infinite;
+}
+
+@keyframes owl-waiting-look {
+  0%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-4px) rotate(-3deg); }
+  70% { transform: translateY(-4px) rotate(3deg); }
+}
+
+/* --- EXCITED MOOD (they hooted, your turn!) --- */
+.owl-excited .owl-pupil-left { r: 16; }
+.owl-excited .owl-pupil-right { r: 16; }
+.owl-excited .owl-shine-left { r: 6; }
+.owl-excited .owl-shine-right { r: 6; }
+
+.owl-excited .owl-blush { opacity: 1; }
+
+.owl-excited svg {
+  animation: owl-excited-bounce 0.8s ease-in-out infinite;
+}
+
+@keyframes owl-excited-bounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.03); }
+}
+
+/* --- HAPPY MOOD --- */
+.owl-happy .owl-eyelids .owl-eyelid-left,
+.owl-happy .owl-eyelids .owl-eyelid-right {
+  ry: 10px;
+}
+
+.owl-happy .owl-pupil-left { cy: 112; }
+.owl-happy .owl-pupil-right { cy: 112; }
+.owl-happy .owl-shine-left { cy: 106; r: 6; }
+.owl-happy .owl-shine-right { cy: 106; r: 6; }
+.owl-happy .owl-blush { opacity: 1; }
+
+.owl-happy svg {
+  animation: owl-happy-sway 2.5s ease-in-out infinite;
+}
+
+@keyframes owl-happy-sway {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-5px) rotate(-3deg); }
+  75% { transform: translateY(-5px) rotate(3deg); }
+}
+
+/* --- CELEBRATING MOOD --- */
+.owl-celebrating .owl-pupil-left { r: 10; cy: 110; }
+.owl-celebrating .owl-pupil-right { r: 10; cy: 110; }
+.owl-celebrating .owl-shine-left { cy: 105; r: 4; }
+.owl-celebrating .owl-shine-right { cy: 105; r: 4; }
+.owl-celebrating .owl-blush { opacity: 1; }
+
+.owl-celebrating .owl-wing-left {
+  animation: wing-flap-left 0.4s ease-in-out infinite alternate;
+  transform-origin: 53px 140px;
+}
+.owl-celebrating .owl-wing-right {
+  animation: wing-flap-right 0.4s ease-in-out infinite alternate;
+  transform-origin: 147px 140px;
+}
+
+@keyframes wing-flap-left {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-20deg); }
+}
+
+@keyframes wing-flap-right {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(20deg); }
+}
+
+.owl-celebrating svg {
+  animation: owl-celebrate-jump 0.6s ease-in-out infinite;
+}
+
+@keyframes owl-celebrate-jump {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-15px) scale(1.05); }
+}
+
+/* Hoot animation (on click) */
+.owl-hooting svg {
+  animation: owl-hoot-squish 0.6s ease-in-out !important;
+}
+
+@keyframes owl-hoot-squish {
+  0% { transform: scale(1); }
+  15% { transform: scale(0.9, 1.1); }
+  30% { transform: scale(1.15, 0.9); }
+  45% { transform: scale(0.95, 1.05); }
+  60% { transform: scale(1.05, 0.95); }
+  100% { transform: scale(1); }
+}
+
+/* Confetti */
+.owl-confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  animation: confetti-fall 2s ease-in-out infinite;
+}
+
+.confetti-1 { background: #3366ff; left: 15%; animation-delay: 0s; }
+.confetti-2 { background: #f59e0b; left: 30%; animation-delay: 0.3s; }
+.confetti-3 { background: #ff6b6b; left: 50%; animation-delay: 0.6s; }
+.confetti-4 { background: #3366ff; left: 65%; animation-delay: 0.2s; }
+.confetti-5 { background: #f59e0b; left: 80%; animation-delay: 0.5s; }
+.confetti-6 { background: #ff6b6b; left: 40%; animation-delay: 0.8s; }
+
+@keyframes confetti-fall {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(250px) rotate(360deg); opacity: 0; }
+}
