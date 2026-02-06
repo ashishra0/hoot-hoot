@@ -116,13 +116,13 @@
 /* --- SLEEPY MOOD --- */
 .owl-sleepy .owl-eyelids .owl-eyelid-left,
 .owl-sleepy .owl-eyelids .owl-eyelid-right {
-  ry: 16px;
+  ry: 8px;
 }
 
-.owl-sleepy .owl-pupil-left { cy: 120; }
-.owl-sleepy .owl-pupil-right { cy: 120; }
-.owl-sleepy .owl-shine-left { cy: 114; }
-.owl-sleepy .owl-shine-right { cy: 114; }
+.owl-sleepy .owl-pupil-left { cy: 118; }
+.owl-sleepy .owl-pupil-right { cy: 118; }
+.owl-sleepy .owl-shine-left { cy: 112; }
+.owl-sleepy .owl-shine-right { cy: 112; }
 
 .owl-sleepy svg {
   animation: owl-sleepy-bob 4s ease-in-out infinite;
@@ -170,7 +170,7 @@
 /* --- HAPPY MOOD --- */
 .owl-happy .owl-eyelids .owl-eyelid-left,
 .owl-happy .owl-eyelids .owl-eyelid-right {
-  ry: 10px;
+  ry: 6px;
 }
 
 .owl-happy .owl-pupil-left { cy: 112; }

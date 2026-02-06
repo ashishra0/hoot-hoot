@@ -1,51 +1,67 @@
 <% transparent = local_assigns.fetch(:transparent, false) %>
 
-<% if transparent %>
-  <nav class="bg-white/10 backdrop-blur-md border-b border-white/10 fixed top-0 left-0 right-0 z-40">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
-      <div class="flex items-center justify-between h-16">
-        <a href="<%= dashboard_path %>" class="flex items-center gap-2 group">
-          <span class="text-2xl transition-transform group-hover:rotate-12">🦉</span>
-          <span class="text-xl font-display font-bold text-white">HootHoot</span>
+<%
+  nav_bg       = transparent ? "bg-white/10 backdrop-blur-md border-b border-white/10 fixed" : "bg-white/80 backdrop-blur-lg border-b border-hoot-100 sticky"
+  logo_class   = transparent ? "text-white" : "bg-gradient-to-r from-hoot-600 to-hoot-500 bg-clip-text text-transparent"
+  link_class   = transparent ? "text-white/80 bg-white/10 hover:bg-white/20" : "text-hoot-600 bg-hoot-50 hover:bg-hoot-100"
+  user_class   = transparent ? "text-white/60" : "text-slate-600"
+  logout_class = transparent ? "text-white/40 hover:text-white/70" : "text-slate-400 hover:text-slate-600"
+  border_class = transparent ? "border-white/20" : "border-surface-200"
+  burger_class = transparent ? "text-white/80" : "text-slate-600"
+  panel_bg     = transparent ? "bg-hoot-700/95 backdrop-blur-lg border-white/10" : "bg-white/95 backdrop-blur-lg border-hoot-100"
+  panel_text   = transparent ? "text-white/80" : "text-slate-700"
+  panel_border = transparent ? "border-white/10" : "border-surface-200"
+%>
+
+<nav class="<%= nav_bg %> top-0 left-0 right-0 z-40" data-controller="menu">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <a href="<%= dashboard_path %>" class="flex items-center gap-2 group">
+        <span class="text-2xl transition-transform group-hover:rotate-12">🦉</span>
+        <span class="text-xl font-display font-bold <%= logo_class %>">HootHoot</span>
+      </a>
+
+      <!-- Desktop nav -->
+      <div class="hidden sm:flex items-center gap-3">
+        <a href="<%= invites_path %>" class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium <%= link_class %> rounded-full transition-colors">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m9.86-4.243a4.5 4.5 0 00-6.364-6.364L4.5 8.688a4.5 4.5 0 001.242 7.244" />
+          </svg>
+          Invite
         </a>
-        <div class="flex items-center gap-3">
-          <a href="<%= invites_path %>" class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-white/80 bg-white/10 hover:bg-white/20 rounded-full transition-colors">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m9.86-4.243a4.5 4.5 0 00-6.364-6.364L4.5 8.688a4.5 4.5 0 001.242 7.244" />
-            </svg>
-            Invite
-          </a>
-          <div class="flex items-center gap-2 pl-3 border-l border-white/20">
-            <span class="text-sm font-medium text-white/60">@<%= current_user.username %></span>
-            <%= button_to "Log out", logout_path, method: :delete,
-                class: "text-sm text-white/40 hover:text-white/70 transition-colors" %>
-          </div>
+        <div class="flex items-center gap-2 pl-3 border-l <%= border_class %>">
+          <span class="text-sm font-medium <%= user_class %>">@<%= current_user.username %></span>
+          <%= button_to "Log out", logout_path, method: :delete,
+              class: "text-sm #{logout_class} transition-colors" %>
         </div>
       </div>
+
+      <!-- Mobile hamburger -->
+      <button data-action="click->menu#toggle" class="sm:hidden p-2 rounded-lg <%= burger_class %>">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
     </div>
-  </nav>
-<% else %>
-  <nav class="bg-white/80 backdrop-blur-lg border-b border-hoot-100 sticky top-0 z-40">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
-      <div class="flex items-center justify-between h-16">
-        <a href="<%= dashboard_path %>" class="flex items-center gap-2 group">
-          <span class="text-2xl transition-transform group-hover:rotate-12">🦉</span>
-          <span class="text-xl font-display font-bold bg-gradient-to-r from-hoot-600 to-hoot-500 bg-clip-text text-transparent">HootHoot</span>
-        </a>
-        <div class="flex items-center gap-3">
-          <a href="<%= invites_path %>" class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-hoot-600 bg-hoot-50 hover:bg-hoot-100 rounded-full transition-colors">
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m9.86-4.243a4.5 4.5 0 00-6.364-6.364L4.5 8.688a4.5 4.5 0 001.242 7.244" />
-            </svg>
-            Invite
-          </a>
-          <div class="flex items-center gap-2 pl-3 border-l border-surface-200">
-            <span class="text-sm font-medium text-slate-600">@<%= current_user.username %></span>
-            <%= button_to "Log out", logout_path, method: :delete,
-                class: "text-sm text-slate-400 hover:text-slate-600 transition-colors" %>
-          </div>
-        </div>
-      </div>
+  </div>
+
+  <!-- Mobile menu panel -->
+  <div data-menu-target="panel" class="hidden sm:hidden border-t <%= panel_bg %> <%= panel_border %>">
+    <div class="px-4 py-4 space-y-3">
+      <div class="text-sm font-medium <%= panel_text %> opacity-60">@<%= current_user.username %></div>
+      <a href="<%= invites_path %>" data-action="click->menu#close" class="flex items-center gap-2 text-sm font-medium <%= panel_text %> py-2">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m9.86-4.243a4.5 4.5 0 00-6.364-6.364L4.5 8.688a4.5 4.5 0 001.242 7.244" />
+        </svg>
+        Invite a friend
+      </a>
+      <%= button_to logout_path, method: :delete, class: "flex items-center gap-2 text-sm font-medium #{panel_text} opacity-60 py-2 w-full text-left" do %>
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
+        </svg>
+        Log out
+      <% end %>
     </div>
-  </nav>
-<% end %>
+  </div>
+</nav>
