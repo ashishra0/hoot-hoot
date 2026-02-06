@@ -1,0 +1,13 @@
+<% flash.each do |type, message| %>
+  <% css_class = type == "alert" ? "bg-red-50 text-red-700 border-red-200" : "bg-hoot-50 text-hoot-700 border-hoot-200" %>
+  <div class="fixed top-20 left-1/2 -translate-x-1/2 z-50 animate-fade-in" data-controller="flash" data-flash-dismiss-after-value="4000">
+    <div class="flex items-center gap-3 px-5 py-3 rounded-xl border shadow-lg <%= css_class %>">
+      <span class="text-sm font-medium"><%= message %></span>
+      <button data-action="click->flash#dismiss" class="ml-2 opacity-60 hover:opacity-100 transition-opacity">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+<% end %>

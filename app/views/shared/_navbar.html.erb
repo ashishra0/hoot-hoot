@@ -1,0 +1,29 @@
+<nav class="bg-white/80 backdrop-blur-lg border-b border-hoot-100 sticky top-0 z-40">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <a href="<%= dashboard_path %>" class="flex items-center gap-2 group">
+        <span class="text-2xl transition-transform group-hover:rotate-12">🦉</span>
+        <span class="text-xl font-display font-bold bg-gradient-to-r from-hoot-600 to-hoot-500 bg-clip-text text-transparent">
+          HootHoot
+        </span>
+      </a>
+
+      <!-- Nav actions -->
+      <div class="flex items-center gap-3">
+        <a href="<%= invites_path %>" class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-hoot-600 bg-hoot-50 hover:bg-hoot-100 rounded-full transition-colors">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-9 1.5a3.75 3.75 0 117.5 0v.75M6 21h12a2.25 2.25 0 002.25-2.25V15A2.25 2.25 0 0018 12.75H6A2.25 2.25 0 003.75 15v3.75A2.25 2.25 0 006 21z" />
+          </svg>
+          Invite
+        </a>
+
+        <div class="flex items-center gap-2 pl-3 border-l border-surface-200">
+          <span class="text-sm font-medium text-slate-600">@<%= current_user.username %></span>
+          <%= button_to "Log out", logout_path, method: :delete,
+              class: "text-sm text-slate-400 hover:text-slate-600 transition-colors" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
