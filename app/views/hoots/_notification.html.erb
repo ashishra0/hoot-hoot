@@ -1,0 +1,11 @@
+<div class="pointer-events-auto" data-controller="toast" data-toast-dismiss-after-value="4000" data-toast-sound-value="/sounds/hoot.wav">
+  <div class="flex items-center gap-3 bg-white border border-hoot-200 rounded-xl px-5 py-3.5 shadow-xl shadow-hoot-500/10 animate-slide-in min-w-[280px]">
+    <div class="shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-hoot-400 to-hoot-600 flex items-center justify-center">
+      <span class="text-xl leading-none">🦉</span>
+    </div>
+    <div>
+      <p class="font-semibold text-slate-800 text-sm"><%= hoot.sender.display_name || hoot.sender.username %></p>
+      <p class="text-xs text-hoot-500 font-medium">hooted at you!</p>
+    </div>
+  </div>
+</div>
