@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "friendship_#{@friendship.id}" do %>
+  <%= render "friendships/card", friendship: @friendship.reload, current_user: current_user %>
+<% end %>

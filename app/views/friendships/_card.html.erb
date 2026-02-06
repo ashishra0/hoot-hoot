@@ -1,0 +1,50 @@
+<% friend = friendship.partner_of(current_user) %>
+<% already_hooted = friendship.hooted_today?(current_user) %>
+
+<div id="friendship_<%= friendship.id %>" class="bg-white rounded-2xl border border-surface-200 shadow-sm hover:shadow-md transition-shadow p-5">
+  <div class="flex items-center justify-between">
+    <!-- Friend info + streak -->
+    <div class="flex items-center gap-4 min-w-0">
+      <!-- Avatar -->
+      <div class="shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-hoot-400 to-hoot-600 flex items-center justify-center shadow-md shadow-hoot-500/20">
+        <span class="text-white font-display font-bold text-lg"><%= friend.username[0].upcase %></span>
+      </div>
+
+      <div class="min-w-0">
+        <!-- Name -->
+        <div class="flex items-center gap-2">
+          <h3 class="font-semibold text-slate-800 truncate">
+            <%= friend.display_name || friend.username %>
+          </h3>
+          <span class="text-xs text-slate-400">@<%= friend.username %></span>
+        </div>
+
+        <!-- Streak info -->
+        <div class="flex items-center gap-2 mt-0.5">
+          <% if friendship.current_streak > 0 %>
+            <span class="text-base leading-none"><%= streak_emoji(friendship.current_streak) %></span>
+            <span class="text-sm font-semibold text-streak-600"><%= friendship.current_streak %>-day streak</span>
+            <span class="text-xs text-slate-300">|</span>
+            <span class="text-xs text-slate-400">best: <%= friendship.longest_streak %></span>
+          <% else %>
+            <span class="text-sm text-slate-400">No active streak</span>
+            <% if friendship.longest_streak > 0 %>
+              <span class="text-xs text-slate-300">|</span>
+              <span class="text-xs text-slate-400">best: <%= friendship.longest_streak %></span>
+            <% end %>
+          <% end %>
+        </div>
+
+        <!-- Status text -->
+        <p class="text-xs mt-1 <%= friendship.hooted_today?(current_user) && friendship.hooted_today?(friend) ? 'text-green-500' : 'text-slate-400' %>">
+          <%= streak_status_text(friendship, current_user) %>
+        </p>
+      </div>
+    </div>
+
+    <!-- Hoot button -->
+    <div class="shrink-0 ml-4">
+      <%= render "friendships/hoot_button", friendship: friendship, already_hooted: already_hooted %>
+    </div>
+  </div>
+</div>
