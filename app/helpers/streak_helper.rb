@@ -30,4 +30,21 @@ module StreakHelper
       "Neither has hooted today."
     end
   end
+
+  def owl_status_message(mood, partner_name)
+    case mood
+    when :happy
+      [ "You both hooted today!", "Streak secured! Hoot some more?", "Hoot hoot! All good today." ].sample
+    when :waiting
+      [ "Waiting on #{partner_name}...", "#{partner_name} hasn't hooted yet...", "I'm waiting..." ].sample
+    when :excited
+      [ "#{partner_name} hooted you!", "Hoot back! Don't leave them hanging!", "Your turn! Tap me!" ].sample
+    when :celebrating
+      [ "Streak milestone!", "You two are on fire!", "Look at that streak go!" ].sample
+    when :sleepy
+      [ "Tap me to send a hoot!", "Nobody's hooted yet today...", "Hoot hoot?" ].sample
+    else
+      "Tap the owl to hoot!"
+    end
+  end
 end

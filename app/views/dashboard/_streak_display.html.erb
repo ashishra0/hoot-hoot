@@ -1,0 +1,15 @@
+<div id="streak-display" class="flex flex-col items-center pt-8">
+  <div class="flex items-center gap-3">
+    <% if friendship.current_streak > 0 %>
+      <span class="text-4xl"><%= streak_emoji(friendship.current_streak) %></span>
+      <span class="text-6xl font-display font-bold text-white drop-shadow-lg"><%= friendship.current_streak %></span>
+    <% else %>
+      <span class="text-4xl opacity-50">🦉</span>
+      <span class="text-5xl font-display font-bold text-white/50">0</span>
+    <% end %>
+  </div>
+
+  <% if friendship.longest_streak > 0 && friendship.longest_streak != friendship.current_streak %>
+    <p class="text-sm text-white/40 mt-1">best: <%= friendship.longest_streak %></p>
+  <% end %>
+</div>
