@@ -1,0 +1,5 @@
+<%= turbo_stream.prepend "invites-list" do %>
+  <%= render "invites/invite", invite: @invite %>
+<% end %>
+
+<%= turbo_stream.remove "empty-invites" %>
