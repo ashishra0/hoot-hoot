@@ -24,7 +24,7 @@
 
   <body class="h-full bg-surface-50 font-body text-slate-800 antialiased">
     <% if current_user %>
-      <%= render "shared/navbar" %>
+      <%= render "shared/navbar", transparent: content_for?(:transparent_navbar) %>
     <% end %>
 
     <%= render "shared/flash" %>

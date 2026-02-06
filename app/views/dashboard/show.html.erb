@@ -1,3 +1,4 @@
+<% content_for :transparent_navbar, "true" %>
 <%= turbo_stream_from "user_#{current_user.id}_hoots" %>
 
 <% if @friendship %>
@@ -29,9 +30,7 @@
 
     <!-- Owl (clickable = hoot) -->
     <div id="owl-area" class="flex-1 flex items-center justify-center animate-fade-in-up">
-      <div data-action="click->owl#hoot">
-        <%= render "shared/owl", mood: @owl_mood %>
-      </div>
+      <%= render "shared/owl", mood: @owl_mood %>
     </div>
 
     <!-- Hidden hoot form -->

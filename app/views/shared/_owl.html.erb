@@ -1,7 +1,7 @@
 <%# Owl SVG character with mood-based expressions %>
 <%# mood: :sleepy, :waiting, :happy, :excited, :celebrating %>
 
-<div class="owl-character owl-<%= mood %>" data-controller="owl" data-owl-mood-value="<%= mood %>">
+<div class="owl-character owl-<%= mood %>" data-controller="owl" data-owl-mood-value="<%= mood %>" data-action="click->owl#hoot">
   <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg" class="w-48 h-52 sm:w-56 sm:h-60 drop-shadow-2xl select-none">
     <%# Ear tufts %>
     <g class="owl-ears">
