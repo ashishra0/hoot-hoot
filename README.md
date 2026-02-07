@@ -2,7 +2,7 @@
 
 A delightful owl-themed social app to stay connected with friends through daily "hoots" and streaks.
 
-![HootHoot Hero](hoot-5.jpg)
+![HootHoot Hero](screenshots/hoot-5.jpg)
 
 ## What is HootHoot?
 
@@ -40,19 +40,19 @@ See your friend's hoots instantly with live WebSocket updates powered by ActionC
 ## Screenshots
 
 ### Friend Request
-![Friend Request](hoot.jpg)
+![Friend Request](screenshots/hoot.jpg)
 
 ### Invite Friends
-![Invite Friends](hoot-2.jpg)
+![Invite Friends](screenshots/hoot-2.jpg)
 
 ### Your Turn to Hoot
-![Your Turn](hoot-3.jpg)
+![Your Turn](screenshots/hoot-3.jpg)
 
 ### Waiting for Friend
-![Waiting](hoot-4.jpg)
+![Waiting](screenshots/hoot-4.jpg)
 
 ### Streak Complete
-![Streak](hoot-5.jpg)
+![Streak](screenshots/hoot-5.jpg)
 
 ## Getting Started
 
