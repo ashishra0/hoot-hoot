@@ -80,11 +80,15 @@ Rails.application.configure do
   config.active_record.attributes_for_inspect = [ :id ]
 
   # Enable DNS rebinding protection and other `Host` header attacks.
+  # If APP_HOST is set, only allow requests from that domain/IP
+  # If not set, allow all hosts (useful for IP-based access during initial setup)
   if ENV["APP_HOST"].present?
     config.hosts = [
-      ENV["APP_HOST"],                    # Allow requests from configured domain
-      /.*\.#{Regexp.escape(ENV["APP_HOST"])}/ # Allow requests from subdomains
+      ENV["APP_HOST"],                    # Allow requests from configured domain/IP
+      /.*\.#{Regexp.escape(ENV["APP_HOST"])}/ # Allow requests from subdomains (if domain)
     ]
+  else
+    config.hosts.clear # Allow all hosts when APP_HOST is not set
   end
 
   # Skip DNS rebinding protection for the default health check endpoint.
