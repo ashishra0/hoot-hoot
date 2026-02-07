@@ -24,14 +24,18 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
-  # Assume all access to the app is happening through a SSL-terminating reverse proxy.
-  config.assume_ssl = true
+  # SSL Configuration - Only enable if HTTPS is actually available
+  # Set FORCE_SSL=true environment variable to enable
+  if ENV["FORCE_SSL"] == "true"
+    # Assume all access to the app is happening through a SSL-terminating reverse proxy.
+    config.assume_ssl = true
 
-  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+    # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
+    config.force_ssl = true
 
-  # Skip http-to-https redirect for the default health check endpoint.
-  config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
+    # Skip http-to-https redirect for the default health check endpoint.
+    config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
+  end
 
   # Log to STDOUT with the current request id as a default log tag.
   config.log_tags = [ :request_id ]
@@ -88,9 +92,8 @@ Rails.application.configure do
       /.*\.#{Regexp.escape(ENV["APP_HOST"])}/ # Allow requests from subdomains (if domain)
     ]
   else
-    config.hosts.clear # Allow all hosts when APP_HOST is not set
+    # Allow all hosts - useful for dynamic domains like Traefik's auto-generated ones
+    config.hosts.clear
+    config.host_authorization = { exclude: ->(request) { true } }
   end
-
-  # Skip DNS rebinding protection for the default health check endpoint.
-  config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 end
