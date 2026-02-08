@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   post "i/:token", to: "invites#claim", as: :claim_invite
 
   # Friendships
-  resources :friendships, only: [ :destroy ]
+  resources :friendships, only: [ :index, :destroy ]
 
   # Hoots
   resources :hoots, only: [ :create ]

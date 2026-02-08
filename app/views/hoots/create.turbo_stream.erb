@@ -33,3 +33,14 @@
     <%= render "shared/owl", mood: @owl_mood %>
   </div>
 <% end %>
+
+<%# Update friend switcher to refresh attention indicators %>
+<% friendships = current_user.friendships.includes(:user, :friend).order(updated_at: :desc) %>
+<% if friendships.size > 1 %>
+  <%= turbo_stream.replace "friend-switcher" do %>
+    <%= render "dashboard/friend_switcher",
+               friendships: friendships,
+               active_friendship: @friendship,
+               current_user: current_user %>
+  <% end %>
+<% end %>

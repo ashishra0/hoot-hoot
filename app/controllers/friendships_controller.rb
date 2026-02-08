@@ -1,6 +1,11 @@
 class FriendshipsController < ApplicationController
   before_action :require_authentication
 
+  def index
+    @friendships = current_user.friendships.includes(:user, :friend).order(updated_at: :desc)
+    @friendships.each { |fs| StreakService.refresh!(fs) }
+  end
+
   def destroy
     @friendship = Friendship
       .where(id: params[:id])

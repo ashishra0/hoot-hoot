@@ -1,8 +1,18 @@
 <% content_for :transparent_navbar, "true" %>
-<%= turbo_stream_from "user_#{current_user.id}_hoots" %>
 
 <% if @friendship %>
-  <div id="dashboard-content" class="fixed inset-0 bg-gradient-to-b from-hoot-500 via-hoot-600 to-hoot-700 flex flex-col items-center justify-between overflow-hidden" style="padding-top: 4.5rem;">
+  <div id="dashboard-content"
+       data-controller="dashboard"
+       data-dashboard-active-friendship-id-value="<%= @friendship.id %>"
+       class="fixed inset-0 bg-gradient-to-b from-hoot-500 via-hoot-600 to-hoot-700 flex flex-col items-center justify-between overflow-hidden" style="padding-top: 4.5rem;">
+
+    <% if @friendships.size > 1 %>
+      <%= render "dashboard/friend_switcher",
+                 friendships: @friendships,
+                 active_friendship: @friendship,
+                 current_user: current_user %>
+    <% end %>
+
     <!-- Streak Counter -->
     <div id="streak-display" class="flex flex-col items-center pt-8 animate-fade-in">
       <div class="flex items-center gap-3">

@@ -2,7 +2,13 @@ class DashboardController < ApplicationController
   before_action :require_authentication
 
   def show
-    @friendship = current_user.friendships.includes(:user, :friend).first
+    @friendships = current_user.friendships.includes(:user, :friend).order(updated_at: :desc)
+
+    @friendship = if params[:friendship_id].present?
+                    @friendships.find_by(id: params[:friendship_id])
+                  end
+    @friendship ||= @friendships.first
+
     if @friendship
       StreakService.refresh!(@friendship)
       @partner = @friendship.partner_of(current_user)

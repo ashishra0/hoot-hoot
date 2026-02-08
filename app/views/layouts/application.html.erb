@@ -24,6 +24,7 @@
 
   <body class="h-full bg-surface-50 font-body text-slate-800 antialiased">
     <% if current_user %>
+      <%= turbo_stream_from "user_#{current_user.id}_hoots" %>
       <%= render "shared/navbar", transparent: content_for?(:transparent_navbar) %>
     <% end %>
 

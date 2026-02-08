@@ -1,0 +1,23 @@
+<%# locals: (friendships:, active_friendship:, current_user:) %>
+<div id="friend-switcher" class="flex gap-2 px-4 py-3 overflow-x-auto no-scrollbar">
+  <% friendships.each do |fs| %>
+    <% partner = fs.partner_of(current_user) %>
+    <% is_active = fs.id == active_friendship.id %>
+    <% needs_attention = fs.hooted_today?(partner) && !fs.hooted_today?(current_user) %>
+    <a href="<%= dashboard_path(friendship_id: fs.id) %>"
+       data-turbo-action="replace"
+       class="shrink-0 flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200
+              <%= is_active ? 'bg-white text-hoot-700 shadow-md' : 'bg-white/15 text-white/80 hover:bg-white/25' %>">
+      <span><%= partner.display_name || partner.username %></span>
+      <% if fs.current_streak > 0 %>
+        <span class="text-xs opacity-70"><%= streak_emoji(fs.current_streak) %> <%= fs.current_streak %></span>
+      <% end %>
+      <% if needs_attention %>
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-400"></span>
+        </span>
+      <% end %>
+    </a>
+  <% end %>
+</div>
